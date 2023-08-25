@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\Admin\HomeController;
 use  App\Http\Controllers\ProjectController;
+use  App\Http\Controllers\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/restore/{project}', [ProjectController::class, 'restore'])->name('projects.restore');
     Route::delete('/obliterate/{project}', [ProjectController::class, 'obliterate'])->name('projects.obliterate');
     Route::resource('/projects', ProjectController::class);
+});
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('/types', TypeController::class);
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Type;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -12,7 +13,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::paginate(10);
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -36,7 +38,8 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        $projects = Project::where('type_id', $type->id)->paginate(15);
+        return view('admin.types.show', compact('projects'));
     }
 
     /**

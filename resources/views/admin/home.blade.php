@@ -16,7 +16,7 @@
             <a href="{{ route('admin.trashed') }}" class="btn btn-danger d-block mt-2">See deleted Projects</a>
 
             <h3 class="mt-4">Types</h3>
-            <a href="#" class="btn btn-primary d-block mt-2">See Types List</a>
+            <a href="{{ route('admin.types.index') }}" class="btn btn-primary d-block mt-2">See Types List</a>
             <a href="#" class="btn btn-success d-block mt-2">Add a new Type</a>
         </div>
     </div>
