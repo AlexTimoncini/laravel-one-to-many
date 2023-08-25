@@ -22,7 +22,7 @@
                     <select class="col-6 rounded text-secondary bg-transparent" name="type">
                         <option selected>Choose the argument of your project</option>
                         @foreach ($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            <option value="{{ $type->id }}" >{{ $type->name }}</option>
                         @endforeach
                     </select>
                     <div class="col-12 mt-3">

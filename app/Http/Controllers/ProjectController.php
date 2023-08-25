@@ -67,7 +67,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $slug)
+    public function show(String $slug)
     {
         $project = Project::findOrFail($slug);
         return view('admin.show', compact('project'));

@@ -17,7 +17,7 @@
 
             <h3 class="mt-4">Types</h3>
             <a href="{{ route('admin.types.index') }}" class="btn btn-primary d-block mt-2">See Types List</a>
-            <a href="#" class="btn btn-success d-block mt-2">Add a new Type</a>
+            <a href="{{ route('admin.types.create') }}" class="btn btn-success d-block mt-2">Add a new Type</a>
         </div>
     </div>
 </div>
