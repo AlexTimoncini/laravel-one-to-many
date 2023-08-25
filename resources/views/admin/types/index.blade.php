@@ -23,7 +23,7 @@
                         <td class="text-primary">{{ $type->documentation }}</td>
                         <td class="d-flex flex-shrink-0 pb-4">
                             <a href="{{ route('admin.types.show', $type) }}" class="btn btn-primary flex-grow-1">Show {{ $type->name }} Projects</a>
-                            <a href="#" class="btn btn-warning mx-2">Edit</a>
+                            <a href="{{ route('admin.types.edit', $type) }}" class="btn btn-warning mx-2">Edit</a>
                             <form action="#" method="POST">
                                 @csrf
                                 @method('DELETE')

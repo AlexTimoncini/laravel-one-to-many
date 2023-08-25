@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center align-items-center">
+    <div class="row justify-content-center">
         @if (count($projects) > 0)
         {{ $projects->links() }}
         @foreach ($projects as $project)

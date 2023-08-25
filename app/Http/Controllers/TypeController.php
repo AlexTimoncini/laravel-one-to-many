@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Type;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TypeController extends Controller
 {
@@ -46,7 +47,7 @@ class TypeController extends Controller
         $newType->documentation = $data['documentation'];
         $newType->save();
 
-        return redirect()->route('admin.types.index');
+        return redirect()->route('admin.types.show');
     }
 
     /**
@@ -63,15 +64,35 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, String $id)
     {
-        //
+        $type = Type::findOrFail($id);
+        $request->validate([
+            'name'=> ['required',
+                Rule::unique('types')->ignore($type->id),
+                'min:3','max:255',],
+            'color'=> [
+                'required',
+                'regex:/^(\#[\da-f]{3}|\#[\da-f]{6}|rgba\(((\d{1,2}|1\d\d|2([0-4]\d|5[0-5]))\s*,\s*){2}((\d{1,2}|1\d\d|2([0-4]\d|5[0-5]))\s*)(,\s*(0\.\d+|1))\)|hsla\(\s*((\d{1,2}|[1-2]\d{2}|3([0-5]\d|60)))\s*,\s*((\d{1,2}|100)\s*%)\s*,\s*((\d{1,2}|100)\s*%)(,\s*(0\.\d+|1))\)|rgb\(((\d{1,2}|1\d\d|2([0-4]\d|5[0-5]))\s*,\s*){2}((\d{1,2}|1\d\d|2([0-4]\d|5[0-5]))\s*)|hsl\(\s*((\d{1,2}|[1-2]\d{2}|3([0-5]\d|60)))\s*,\s*((\d{1,2}|100)\s*%)\s*,\s*((\d{1,2}|100)\s*%)\))$/i',
+            ],
+            'documentation'=> ['required',
+            Rule::unique('types')->ignore($type->id),
+            'min:3'],
+        ]);
+        $data = $request->all();
+
+        $type->name = $data['name'];
+        $type->color = $data['color'];
+        $type->documentation = $data['documentation'];
+        $type->save();
+
+        return redirect()->route('admin.types.show', compact('type'));
     }
 
     /**
