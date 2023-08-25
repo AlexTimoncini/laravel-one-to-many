@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Project;
+use App\Models\Type;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -15,8 +16,10 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
-        for ($i=0; $i < 10; $i++) { 
+        $type_ids = Type::all()->pluck('id');
+        for ($i=0; $i < 100; $i++) { 
             $newProject = new Project();
+            $newProject->type_id = $faker->randomElement($type_ids);
             $newProject->title = $faker->sentence(3);
             $newProject->topic = $faker->sentence(2);
             $newProject->date = $faker->date();
