@@ -78,7 +78,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.edit', compact('project'), compact('types'));
     }
 
     /**
@@ -89,6 +90,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $data = $request->validate([
             'title'=> ['required',Rule::unique('projects')->ignore($project->id),'min:3','max:255'],
+            'type'=> 'required|exists:types,id',
             'topic'=> ['required',Rule::unique('projects')->ignore($project->id),'min:3','max:255'],
             'gitHub'=> ['required',Rule::unique('projects')->ignore($project->id),'min:5','max:255'],
             'image' => ['image']
@@ -103,6 +105,7 @@ class ProjectController extends Controller
         }
 
         $project->title = $data['title'];
+        $project->type_id = $data['type'];
         $project->topic = $data['topic'];
         $project->date = date('y-m-d');
         $project->gitHub = $data['gitHub'];

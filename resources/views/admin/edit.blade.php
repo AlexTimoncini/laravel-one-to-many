@@ -23,7 +23,13 @@
                         <div class="col-6">
                             <input type="text" class="form-control" placeholder="Title" name="title" value="{{ old( 'title', $project->title) }}">
                         </div>
-                        <div class="col-6">
+                        <select class="col-6 rounded text-secondary bg-transparent" name="type">
+                            <option>Choose the argument of your project</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}" {{ $project->type->id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="col-12">
                             <input type="text" class="form-control" placeholder="Topic" name="topic" value="{{ old( 'topic', $project->topic) }}">
                         </div>
                         <div class="col-12 input-group mb-3">
