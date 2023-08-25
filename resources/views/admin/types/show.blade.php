@@ -21,11 +21,13 @@
         </a>
         </div>
         @endforeach
-        @else
+    </div>
+    @else
+    <div class="row align-items-center">
         <h1 class="col-6">There's nothing here!</h1>
         <a href="{{ route('projects.create') }}" class="btn btn-success col-4 ms-auto">Create your first project in {{ $type->name }}!</a>
-        @endif
-        <a href="{{ route('admin.types.index') }}" class="btn btn-primary d-block mt-5">Back to list</a>
     </div>
+    @endif
+    <a href="{{ route('admin.types.index') }}" class="btn btn-primary d-block mt-5">Back to list</a>
 </div>
 @endsection

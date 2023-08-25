@@ -6,6 +6,7 @@ use App\Models\Type;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class TypeController extends Controller
 {
@@ -47,7 +48,7 @@ class TypeController extends Controller
         $newType->documentation = $data['documentation'];
         $newType->save();
 
-        return redirect()->route('admin.types.show');
+        return redirect()->route('admin.types.index');
     }
 
     /**
@@ -100,6 +101,13 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $projects = Project::where('type_id', $type->id)->get();
+        foreach ($projects as $project){
+            Storage::delete($project->image);
+            $project->forceDelete();
+        }
+        
+        $type->delete();
+        return redirect()->route('admin.types.index');
     }
 }
