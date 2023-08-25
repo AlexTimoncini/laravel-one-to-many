@@ -127,7 +127,7 @@ class ProjectController extends Controller
 
     public function trashed()
     {
-        $projects = Project::onlyTrashed()->get();
+        $projects = Project::onlyTrashed()->paginate(10);
 
         return view('admin.trashed', compact('projects'));
     }

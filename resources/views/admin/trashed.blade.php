@@ -4,11 +4,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
-            @guest
-                <h1>You must be logged first!</h1>
-            @else
-            <a href="{{ route('projects.create') }}" class="btn btn-primary">Add a new Project</a>
-            <a href="{{ route('projects.index') }}" class="btn btn-primary">Back to list</a>
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -30,24 +25,24 @@
                         <td class="text-primary">{{ $project->gitHub }}</td>
                         <td class="d-flex flex-shrink-0">
                         <form class="d-inline-block me-2" action="{{ route('projects.restore', $project) }}" method="POST">
-                                    @csrf
+                            @csrf
 
-                                    <button type="submit" class="btn btn-success me-2">
-                                        Restore
-                                    </button>
-                                </form>
-
-                            <form action="{{ route('projects.obliterate', $project) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Obliterate</button>
-                            </form>
+                            <button type="submit" class="btn btn-success me-2">
+                                Restore
+                            </button>
+                        </form>
+                        <form action="{{ route('projects.obliterate', $project) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Obliterate</button>
+                        </form>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            @endguest
+            {{ $projects->links() }}
+            <a href="{{ route('admin.index') }}" class="btn btn-primary">Back to dashboard</a>
         </div>
     </div>
 </div>

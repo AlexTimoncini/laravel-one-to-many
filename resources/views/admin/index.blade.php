@@ -4,11 +4,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
-            @guest
-                <h1>You must be logged first!</h1>
-            @else
-            <a href="{{ route('projects.create') }}" class="btn btn-primary">Add a new Project</a>
-            <a href="{{ route('admin.trashed') }}" class="btn btn-danger">See deleted Projects</a>
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -42,7 +37,8 @@
                 </tbody>
             </table>
             {{ $projects->links() }}
-            @endguest
+
+            <a href="{{ route('admin.index') }}" class="btn btn-primary">Back to Dashboard</a>
         </div>
     </div>
 </div>
