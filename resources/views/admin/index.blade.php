@@ -41,6 +41,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $projects->links() }}
             @endguest
         </div>
     </div>
