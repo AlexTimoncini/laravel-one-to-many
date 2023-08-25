@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $types = Type::all();
+        return view('admin.create', compact('types'));
     }
 
     /**
@@ -32,8 +34,10 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $types = Type::all();
         $request->validate([
             'title'=> 'required|unique:projects|min:3|max:255',
+            'type'=> 'required|exists:types,id',
             'topic'=> 'required|unique:projects|min:3|max:255',
             'gitHub'=> 'required|unique:projects|min:5|max:255',
             'image' => 'required|image'
@@ -47,6 +51,7 @@ class ProjectController extends Controller
 
         $newProject = new Project();
         $newProject->title = $data['title'];
+        $newProject->type_id = $data['type'];
         $newProject->topic = $data['topic'];
         $newProject->date = date('y-m-d');
         $newProject->gitHub = $data['gitHub'];

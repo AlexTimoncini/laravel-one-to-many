@@ -22,8 +22,14 @@
                         <div class="col-6">
                             <input type="text" class="form-control" placeholder="Title" name="title" value="{{ old('title', '') }}">
                         </div>
-                        <div class="col-6">
-                            <input type="text" class="form-control" placeholder="Topic" name="topic" value="{{ old('topic', '') }}">
+                        <select class="col-6 rounded text-secondary bg-transparent" name="type">
+                            <option selected>Choose the argument of your project</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="col-12 mt-3">
+                            <input type="text" class="form-control" placeholder="Detailed Argument" name="topic" value="{{ old('topic', '') }}">
                         </div>
                         <div class="col-12 input-group my-3">
                             <div class="input-group-prepend">
